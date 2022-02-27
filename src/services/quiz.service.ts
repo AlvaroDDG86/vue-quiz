@@ -2,11 +2,27 @@ import axios from "axios";
 
 export const QuizService = {
   getQuizzes() {
-    return axios
-      .get("https://printful.com/test-quiz.php?action=quizzes")
-      .then((res: any) => {
-        return res.data;
-      });
+    return new Promise((respone) => {
+      respone([
+        {
+          id: 141,
+          title: "Video Games",
+        },
+        {
+          id: 169,
+          title: "Numbers",
+        },
+        {
+          id: 322,
+          title: "Movies",
+        },
+      ]);
+    });
+    // return axios
+    //   .get("https://printful.com/test-quiz.php?action=quizzes")
+    //   .then((res: any) => {
+    //     return res.data;
+    //   });
   },
   getQuizById(id: number) {
     return axios

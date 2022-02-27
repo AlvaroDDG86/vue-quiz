@@ -4,7 +4,12 @@ import { QuizService } from "@/services/quiz.service";
 export const useQuizStore = defineStore("quiz", {
   state: () => ({
     quizzes: [],
-    questions: [],
+    questions: [
+      {
+        id: 1,
+        title: "Probando",
+      },
+    ],
   }),
   actions: {
     getQuizzes() {

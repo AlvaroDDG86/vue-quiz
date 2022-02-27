@@ -1,13 +1,10 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+  <div class="resume">
+    <AppContainer> hola </AppContainer>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "Home",
-});
-</script>
+<style lang="postcss">
+.resume {
+  @apply w-screen h-screen bg-green-400 flex justify-center items-center;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <section class="home__content">
+    <AppContainer>
       <h1 class="home__title">Vue Quiz</h1>
       <form @submit.prevent="submitHandler" class="home__form">
         <AppInput
@@ -15,10 +15,10 @@
           @input="selectHandler"
         />
         <div class="home__actions">
-          <AppButton :disabled="disableButton">Start Quiz</AppButton>
+          <AppButton :disabled="disableButton"> Start Quiz </AppButton>
         </div>
       </form>
-    </section>
+    </AppContainer>
   </div>
 </template>
 
@@ -29,9 +29,11 @@ import { QuizType } from "@/models/quiz-type.model";
 import AppSelect from "@/components/AppSelect.vue";
 import AppInput from "@/components/AppInput.vue";
 import { SelectItem } from "@/models/select.model";
+import { useRouter } from "vue-router";
 export default defineComponent({
   name: "Home",
   setup() {
+    const router = useRouter();
     const userName = ref("");
     const quitTypeSelected = ref({} as SelectItem);
     const quizStore = useQuizStore();
@@ -46,7 +48,9 @@ export default defineComponent({
     });
     quizStore.getQuizzes();
     const submitHandler = () => {
-      console.log(userName.value);
+      router.push({
+        name: "Quiz",
+      });
     };
     const selectHandler = (optionSelected: SelectItem) => {
       quitTypeSelected.value = optionSelected;
@@ -66,11 +70,6 @@ export default defineComponent({
 <style lang="postcss">
 .home {
   @apply bg-green-400 w-screen h-screen flex justify-center items-center overflow-hidden;
-}
-
-.home__content {
-  @apply w-full h-96 bg-white text-center rounded-lg shadow-lg mx-5;
-  @apply md:w-1/3;
 }
 
 .home__title {

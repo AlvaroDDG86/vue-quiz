@@ -15,7 +15,7 @@
           @input="selectHandler"
         />
         <div class="home__actions">
-          <AppButton>Start Quiz</AppButton>
+          <AppButton :disabled="disableButton">Start Quiz</AppButton>
         </div>
       </form>
     </section>
@@ -33,6 +33,7 @@ export default defineComponent({
   name: "Home",
   setup() {
     const userName = ref("");
+    const quitTypeSelected = ref({} as SelectItem);
     const quizStore = useQuizStore();
     const quizzes = computed(() =>
       quizStore.quizzes.map((quiz: QuizType) => ({
@@ -40,17 +41,21 @@ export default defineComponent({
         description: quiz.title,
       }))
     );
+    const disableButton = computed(() => {
+      return userName.value === "" || !quitTypeSelected.value.id;
+    });
     quizStore.getQuizzes();
     const submitHandler = () => {
       console.log(userName.value);
     };
     const selectHandler = (optionSelected: SelectItem) => {
-      console.log(optionSelected);
+      quitTypeSelected.value = optionSelected;
       quizStore.getQuizById(optionSelected.id);
     };
     return {
       quizzes,
       userName,
+      disableButton,
       submitHandler,
       selectHandler,
     };

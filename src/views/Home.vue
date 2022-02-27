@@ -28,6 +28,7 @@ import { useQuizStore } from "@/store/quiz.store";
 import { QuizType } from "@/models/quiz-type.model";
 import AppSelect from "@/components/AppSelect.vue";
 import AppInput from "@/components/AppInput.vue";
+import { SelectItem } from "@/models/select.model";
 export default defineComponent({
   name: "Home",
   setup() {
@@ -43,8 +44,9 @@ export default defineComponent({
     const submitHandler = () => {
       console.log(userName.value);
     };
-    const selectHandler = (optionSelected: Event) => {
+    const selectHandler = (optionSelected: SelectItem) => {
       console.log(optionSelected);
+      quizStore.getQuizById(optionSelected.id);
     };
     return {
       quizzes,

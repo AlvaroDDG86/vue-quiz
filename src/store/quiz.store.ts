@@ -1,20 +1,20 @@
 import { defineStore } from "pinia";
 import { QuizService } from "@/services/quiz.service";
 
-export const useQuizStore = defineStore("counter", {
-state: () => ({
+export const useQuizStore = defineStore("quiz", {
+  state: () => ({
     quizzes: [],
     questions: [],
   }),
   actions: {
     getQuizzes() {
       QuizService.getQuizzes().then((res: any) => {
-        this.quizzes = res
+        this.quizzes = res;
       });
     },
-    setQuestions(quizId: string) {
-      QuizService.getQuizzes().then((res: any) => {
-        console.log(res);
+    getQuizById(quizId: number) {
+      QuizService.getQuizById(quizId).then((res: any) => {
+        this.questions = res;
       });
     },
   },

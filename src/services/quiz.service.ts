@@ -25,11 +25,38 @@ export const QuizService = {
     //   });
   },
   getQuizById(id: number) {
-    return axios
-      .get("https://printful.com/test-quiz.php?action=questions&quizId=141")
-      .then((res: any) => {
-        return res.data;
-      });
+    return new Promise((respone) => {
+      respone([
+        {
+          id: 29543,
+          title: "What is the highest number used in a Sudoku puzzle?",
+        },
+        {
+          id: 58186,
+          title: "How many dots are used in each letter in the Braille system?",
+        },
+        {
+          id: 86721,
+          title:
+            "How many tenpin bowling skittles need knocking down for a strike?",
+        },
+        {
+          id: 149197,
+          title: "How many sides has an octagon?",
+        },
+        {
+          id: 215738,
+          title: "How many sides has a 20-pence piece?",
+        },
+      ]);
+    });
+    // return axios
+    //   .get(
+    //     `https://printful.com/test-quiz.php?action=questions&quizId=${id.toString()}`
+    //   )
+    //   .then((res: any) => {
+    //     return res.data;
+    //   });
   },
   getQuestionsByQuestionId(id: number) {
     return axios

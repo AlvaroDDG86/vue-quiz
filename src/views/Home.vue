@@ -3,18 +3,20 @@
     <section class="home__content">
       <h1 class="home__title">Vue Quiz</h1>
       <form @submit.prevent="submitHandler" class="home__form">
-        <div class="form-control">
-          <label for="name">Enter an user name:</label>
-          <input
-            id="name"
-            type="text"
-            placeholder="User name"
-            v-model="userName"
-            required
-          />
+        <AppInput
+          id="username"
+          v-model="userName"
+          label="Enter the user name"
+          placeholder="user name"
+        />
+        <AppSelect
+          :options="quizzes"
+          placeholder="Select the quiz type"
+          @input="selectHandler"
+        />
+        <div class="home__actions">
+          <AppButton>Start Quiz</AppButton>
         </div>
-        <AppSelect :options="quizzes" @input="selectHandler" />
-        <AppButton>Start Quiz</AppButton>
       </form>
     </section>
   </div>
@@ -23,18 +25,25 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import { useQuizStore } from "@/store/quiz.store";
+import { QuizType } from "@/models/quiz-type.model";
 import AppSelect from "@/components/AppSelect.vue";
+import AppInput from "@/components/AppInput.vue";
 export default defineComponent({
   name: "Home",
   setup() {
     const userName = ref("");
     const quizStore = useQuizStore();
-    const quizzes = computed(() => quizStore.quizzes);
+    const quizzes = computed(() =>
+      quizStore.quizzes.map((quiz: QuizType) => ({
+        id: quiz.id,
+        description: quiz.title,
+      }))
+    );
     quizStore.getQuizzes();
     const submitHandler = () => {
       console.log(userName.value);
     };
-    const selectHandler = (optionSelected: any) => {
+    const selectHandler = (optionSelected: Event) => {
       console.log(optionSelected);
     };
     return {
@@ -44,16 +53,17 @@ export default defineComponent({
       selectHandler,
     };
   },
-  components: { AppSelect },
+  components: { AppSelect, AppInput },
 });
 </script>
 <style lang="postcss">
 .home {
-  @apply bg-green-400 w-screen h-screen flex justify-center items-center;
+  @apply bg-green-400 w-screen h-screen flex justify-center items-center overflow-hidden;
 }
 
 .home__content {
-  @apply w-1/3 h-96 bg-white text-center rounded-lg shadow-lg;
+  @apply w-full h-96 bg-white text-center rounded-lg shadow-lg mx-5;
+  @apply md:w-1/3;
 }
 
 .home__title {
@@ -63,14 +73,7 @@ export default defineComponent({
 .home__form {
   @apply h-full flex flex-col justify-start items-center;
 }
-
-.form-control {
-  @apply w-full flex flex-col items-start py-4 px-2;
-}
-.form-control label {
-  @apply py-2 px-1 font-bold text-gray-600;
-}
-.form-control input {
-  @apply py-2 px-1 rounded-sm w-full outline-none bg-gray-100;
+.home__actions {
+  @apply mt-5;
 }
 </style>

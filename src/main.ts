@@ -8,6 +8,7 @@ import "./assets/tailwind.css";
 import App from "./App.vue";
 import AppButton from "./components/AppButton.vue";
 import AppSelect from "./components/AppSelect.vue";
+import AppInput from "./components/AppInput.vue";
 
 const app = createApp(App);
 
@@ -16,4 +17,5 @@ app.use(router);
 app.use(VueAxios, axios);
 app.component("AppButton", AppButton);
 app.component("AppSelect", AppSelect);
+app.component("AppInput", AppInput);
 app.mount("#app");

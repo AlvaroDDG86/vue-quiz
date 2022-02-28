@@ -80,7 +80,8 @@ export default defineComponent({
 }
 
 .home__title {
-  @apply text-gray-500 text-3xl font-bold py-4;
+  @apply font-extrabold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600;
+  @apply md:text-4xl;
 }
 
 .home__form {

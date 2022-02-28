@@ -62,7 +62,8 @@ export default defineComponent({
 </script>
 <style lang="postcss">
 .question {
-  @apply bg-gray-100 rounded-lg shadow-md m-4 py-8 w-full;
+  @apply bg-gray-100 rounded-lg shadow-md m-2 py-8 w-full;
+  @apply md:m-4;
 }
 .question__title {
   @apply font-bold text-sm text-left py-1 px-3 mb-2;
@@ -75,8 +76,8 @@ export default defineComponent({
 }
 .question__option {
   min-height: fit-content;
-  @apply rounded border-2 border-green-500 bg-white text-xs flex justify-center items-center cursor-pointer;
-  @apply hover:border-green-700 hover:bg-gray-200;
+  @apply rounded border-2 border-green-500 bg-white text-xs flex justify-center items-center cursor-pointer duration-300 shadow-md;
+  @apply hover:border-green-700 hover:bg-gray-200 hover:shadow-none;
   @apply md:text-sm md:h-12;
 }
 .question__option--selected {

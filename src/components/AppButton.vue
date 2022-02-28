@@ -21,7 +21,7 @@ export default defineComponent({
 </script>
 <style lang="postcss">
 .button {
-  @apply text-blue-50 bg-blue-700 rounded shadow p-1 text-xs;
+  @apply text-blue-50 bg-blue-700 rounded shadow p-1 text-xs duration-300;
   @apply hover:bg-blue-500;
   @apply md:text-lg py-2 px-4;
 }

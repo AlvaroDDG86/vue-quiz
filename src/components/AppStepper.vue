@@ -8,7 +8,7 @@
         class="app-stepper__step"
         :class="{ 'app-stepper__step--active': current >= step }"
       >
-        {{ step }}
+        <span class="app-stepper__number">{{ step }}</span>
       </div>
     </div>
     <div class="app-stepper__actions">
@@ -89,8 +89,13 @@ export default defineComponent({
 }
 
 .app-stepper__step {
-  @apply flex justify-center items-center w-4 h-4 bg-white font-bold text-gray-700 z-10 border-2 border-blue-700 text-xs;
+  @apply flex justify-center items-center w-2 h-2 rounded-lg bg-white font-bold text-gray-700 z-10 border-2 border-blue-700 text-xs;
   @apply md:w-8 md:h-8 md:text-sm md:rounded-md;
+}
+
+.app-stepper__number {
+  @apply hidden;
+  @apply md:inline;
 }
 
 .app-stepper__step--active {

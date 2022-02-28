@@ -45,6 +45,6 @@ export const useQuizStore = defineStore("quiz", {
   },
   getters: {
     isQuizPartial: (state) =>
-      state.questions.every((question) => question.answer !== null),
+      state.questions.some((question) => question.answer === undefined),
   },
 });

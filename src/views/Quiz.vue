@@ -20,12 +20,13 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
-import AppStepper from "@/components/AppStepper.vue";
+import { useRouter } from "vue-router";
 import Question from "@/components/Question.vue";
+import AppStepper from "@/components/AppStepper.vue";
+import AppButton from "@/components/AppButton.vue";
 import { useQuizStore } from "@/store/quiz.store";
 import { Answer } from "@/models/answer.model";
-import AppButton from "@/components/AppButton.vue";
-import { useRouter } from "vue-router";
+import { notify } from "@kyvg/vue3-notification";
 export default defineComponent({
   name: "Quiz",
   components: {
@@ -67,6 +68,9 @@ export default defineComponent({
     };
     const checkAnswerHandler = (option: Answer) => {
       optionSelected.value = option;
+      notify({
+        title: `You have selected: ${optionSelected.value.title} 🎉`,
+      });
       quizStore.setAnswer(currentQuestion.value.id, optionSelected.value);
     };
     const showResumeHandler = () => {

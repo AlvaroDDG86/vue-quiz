@@ -2,21 +2,26 @@ import { Answer } from "@/models/answer.model";
 import { Question } from "@/models/question.model";
 import { QuizType } from "@/models/quiz-type.model";
 import axios from "axios";
-// import { useLoading } from 'vue-loading-overlay'
+import { useLoading } from 'vue-loading-overlay'
 const _axios = axios.create({
   baseURL: "https://printful.com",
 });
 
+const $loader = useLoading();
+let loader: any;
 _axios.interceptors.request.use((config) => {
-  // loader = $loader.show({});
+  loader = $loader.show({});
   return config;
 });
 _axios.interceptors.response.use(
   (response) => {
-    // loader.hide()
+    loader.hide();
     return response;
   },
-  (error) => console.log(error)
+  (error) => {
+    loader.hide();
+    console.log(error);
+  }
 );
 
 export const QuizService = {

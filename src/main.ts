@@ -4,7 +4,8 @@ import router from "./router";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import "./assets/tailwind.css";
-
+import VueLoading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 import App from "./App.vue";
 import AppButton from "./components/AppButton.vue";
 import AppSelect from "./components/AppSelect.vue";
@@ -15,6 +16,7 @@ const app = createApp(App);
 app.use(createPinia());
 app.use(router);
 app.use(VueAxios, axios);
+app.use(VueLoading);
 app.component("AppButton", AppButton);
 app.component("AppSelect", AppSelect);
 app.component("AppInput", AppInput);

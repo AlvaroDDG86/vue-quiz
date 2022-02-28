@@ -69,6 +69,7 @@ export default defineComponent({
   @apply md:text-xl;
 }
 .question__options {
+  min-width: 4rem;
   @apply w-full grid grid-cols-1 gap-1 px-3;
   @apply sm:grid-cols-2;
 }

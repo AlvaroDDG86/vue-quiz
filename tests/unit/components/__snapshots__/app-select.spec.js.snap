@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Question Should match snapshot 1`] = `
+<div class="app-select">
+  <div class="app-select__selected"><span>placeholder test</span></div>
+  <div class="app-select__items app-select__items--close">
+    <div class="app-select__item">Option 1</div>
+  </div>
+</div>
+`;

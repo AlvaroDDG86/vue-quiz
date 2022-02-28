@@ -1,3 +1,30 @@
+<template>
+  <div class="app-select" @blur="blurHandler">
+    <div
+      class="app-select__selected"
+      :class="{ open: open }"
+      @click="clickSelectHandler"
+    >
+      <span v-if="selected.description">
+        {{ selected.description }}
+      </span>
+      <span v-else-if="placeholder">{{ placeholder }}</span>
+    </div>
+    <div
+      class="app-select__items"
+      :class="{ 'app-select__items--close': !open }"
+    >
+      <div
+        class="app-select__item"
+        v-for="(option, i) of options"
+        :key="i"
+        @click="clickItemHandler(option)"
+      >
+        {{ option.description }}
+      </div>
+    </div>
+  </div>
+</template>
 <script lang="ts">
 import { defineComponent, PropType, ref, toRefs } from "vue";
 import { SelectItem } from "@/models/select.model";
@@ -41,33 +68,7 @@ export default defineComponent({
   },
 });
 </script>
-<template>
-  <div class="app-select" @blur="blurHandler">
-    <div
-      class="app-select__selected"
-      :class="{ open: open }"
-      @click="clickSelectHandler"
-    >
-      <span v-if="selected.description">
-        {{ selected.description }}
-      </span>
-      <span v-else-if="placeholder">{{ placeholder }}</span>
-    </div>
-    <div
-      class="app-select__items"
-      :class="{ 'app-select__items--close': !open }"
-    >
-      <div
-        class="app-select__item"
-        v-for="(option, i) of options"
-        :key="i"
-        @click="clickItemHandler(option)"
-      >
-        {{ option.description }}
-      </div>
-    </div>
-  </div>
-</template>
+
 <style lang="postcss" scoped>
 .app-select {
   @apply relative w-full text-center outline-none py-2 px-4;

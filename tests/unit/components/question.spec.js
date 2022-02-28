@@ -34,7 +34,6 @@ describe("Question", () => {
     expect(wrapper.vm.selected.title).toBe("Option 1");
     wrapper.find("app-button-stub").trigger("click");
     expect(wrapper.emitted("check-answer").length).toBe(1);
-    console.log(wrapper.emitted("check-answer"));
     expect(wrapper.emitted("check-answer")[0][0]).toEqual({
       id: 1,
       title: "Option 1",

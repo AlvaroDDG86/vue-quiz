@@ -59,13 +59,33 @@ export const QuizService = {
     //   });
   },
   getQuestionsByQuestionId(id: number) {
-    return axios
-      .get(
-        "https://printful.com/test-quiz.php?action=answers&quizId=141&questionId=3193"
-      )
-      .then((res: any) => {
-        return res.data;
-      });
+    return new Promise((resolve) => {
+      resolve([
+        {
+          id: 123988,
+          title: "Controller",
+        },
+        {
+          id: 141001,
+          title: "The lights",
+        },
+        {
+          id: 262891,
+          title: "Graphics Card & Heat Sink",
+        },
+        {
+          id: 414029,
+          title: "TV Screen",
+        },
+      ]);
+    });
+    // return axios
+    //   .get(
+    //     "https://printful.com/test-quiz.php?action=answers&quizId=141&questionId=3193"
+    //   )
+    //   .then((res: any) => {
+    //     return res.data;
+    //   });
   },
   getAnswerByQuestionId(id: number) {
     return axios

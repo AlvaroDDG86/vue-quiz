@@ -2,13 +2,7 @@
   <div class="quiz">
     <AppContainer class="quiz__container">
       <h3>Quiz</h3>
-      <div class="quiz__question">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          architecto neque ratione sequi ad quisquam fugiat veniam ut, tempora
-          est?
-        </p>
-      </div>
+      <Question :question="currentQuestion" />
       <AppStepper
         :steps="steps"
         :current="current"
@@ -20,29 +14,44 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import AppStepper from "@/components/AppStepper.vue";
+import Question from "@/components/Question.vue";
 import { useQuizStore } from "@/store/quiz.store";
 export default defineComponent({
   name: "Quiz",
   components: {
     AppStepper,
+    Question,
   },
   setup() {
     const current = ref(1);
     const quizStore = useQuizStore();
+    const currentQuestion = computed(
+      () => quizStore.questions[current.value - 1]
+    );
     const steps = computed(() => quizStore.questions.length);
+
+    watch(
+      currentQuestion,
+      (value) => {
+        quizStore.getQuestionsByQuestionId(value.id);
+      },
+      {
+        immediate: true,
+      }
+    );
+
     const prevHandler = () => {
-      console.log("prev");
       current.value--;
     };
     const nextHandler = () => {
-      console.log("next");
       current.value++;
     };
     return {
       steps,
       current,
+      currentQuestion,
       prevHandler,
       nextHandler,
     };
@@ -57,6 +66,6 @@ export default defineComponent({
   @apply flex flex-col justify-around items-center;
 }
 .quiz__question {
-  @apply bg-gray-100 rounded-lg shadow-md mx-4 py-8;
+  @apply bg-gray-100 rounded-lg shadow-md m-4 py-8 w-full box-content;
 }
 </style>

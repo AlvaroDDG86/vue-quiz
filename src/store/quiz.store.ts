@@ -1,13 +1,14 @@
 import { defineStore } from "pinia";
 import { QuizService } from "@/services/quiz.service";
+import { Question } from "@/models/question.model";
 
 export const useQuizStore = defineStore("quiz", {
   state: () => ({
     quizzes: [],
-    questions: [
+    questions: <Question[]>[
       {
-        id: 1,
-        title: "Probando",
+        id: 29543,
+        title: "What is the highest number used in a Sudoku puzzle?",
       },
     ],
   }),
@@ -20,6 +21,15 @@ export const useQuizStore = defineStore("quiz", {
     getQuizById(quizId: number) {
       QuizService.getQuizById(quizId).then((res: any) => {
         this.questions = res;
+      });
+    },
+    getQuestionsByQuestionId(questionId: number) {
+      QuizService.getQuestionsByQuestionId(questionId).then((res: any) => {
+        this.questions.forEach((question) => {
+          if (question.id === questionId) {
+            question.options = [...res];
+          }
+        });
       });
     },
   },

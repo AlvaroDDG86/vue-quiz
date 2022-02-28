@@ -11,7 +11,8 @@ export default defineComponent({
 </script>
 <style lang="postcss">
 .container {
-  @apply w-full h-96 bg-white text-center rounded-lg shadow-lg mx-5;
-  @apply md:w-1/3;
+  min-width: 200px;
+  @apply w-full bg-white text-center rounded-lg shadow-lg mx-5 py-6 px-4;
+  @apply md:w-2/3 lg:w-1/2;
 }
 </style>

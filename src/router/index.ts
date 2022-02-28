@@ -1,7 +1,7 @@
-import { useUserStore } from './../store/user.store';
+import { useUserStore } from "./../store/user.store";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/views/Home.vue";
-import { nextTick } from 'vue';
+import { nextTick } from "vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,6 +25,12 @@ const routes: Array<RouteRecordRaw> = [
       needUser: true,
     },
   },
+  {
+    path: "/network-error",
+    name: "NetworkError",
+    component: () => import("@/views/NetworkError.vue"),
+  },
+  { path: "/:pathMatch(.*)*", component: () => import("@/views/NotFound.vue") },
 ];
 
 const router = createRouter({

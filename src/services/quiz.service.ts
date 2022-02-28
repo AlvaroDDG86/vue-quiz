@@ -10,6 +10,7 @@ const _axios = axios.create({
 });
 
 const $loader = useLoading();
+import Router from "../router/index";
 let loader: ActiveLoader;
 _axios.interceptors.request.use((config) => {
   loader = $loader.show({});
@@ -22,6 +23,7 @@ _axios.interceptors.response.use(
   },
   (error) => {
     loader.hide();
+    Router.replace({ name: "NetworkError" });
     console.log(error);
   }
 );

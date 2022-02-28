@@ -13,13 +13,13 @@
     </div>
     <div class="app-stepper__actions">
       <AppButton @click="prevHandler" :disabled="current === 1 || disablePrev"
-        >Prev</AppButton
-      >
+        ><fa icon="arrow-left"
+      /></AppButton>
       <AppButton
         @click="nextHandler"
         :disabled="current === steps || disableNext"
-        >Next</AppButton
-      >
+        ><fa icon="arrow-right"
+      /></AppButton>
     </div>
   </div>
 </template>

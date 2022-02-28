@@ -4,7 +4,9 @@
       <h3 class="quiz__title">Quiz: {{ quizName }}</h3>
       <Question :question="currentQuestion" @checkAnswer="checkAnswerHandler" />
       <div v-if="showResumeButton" class="quiz__show-resume">
-        <AppButton @click="showResumeHandler"> Show resume </AppButton>
+        <AppButton @click="showResumeHandler"
+          ><fa icon="list-check" /> Show resume
+        </AppButton>
       </div>
       <AppStepper
         :steps="steps"

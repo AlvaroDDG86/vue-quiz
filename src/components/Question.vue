@@ -16,7 +16,7 @@
     </div>
     <div class="question__validate">
       <AppButton :disabled="selected === undefined" @click="checkAnswerhandler">
-        Check answer
+        <fa icon="check-square" /> Check answer
       </AppButton>
     </div>
   </div>

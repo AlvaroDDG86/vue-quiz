@@ -2,11 +2,11 @@
   <div class="quiz">
     <AppContainer class="quiz__container">
       <h3>Quiz</h3>
-      <Question :question="currentQuestion" />
+      <Question :question="currentQuestion" @checkAnswer="checkAnswerHandler" />
       <AppStepper
         :steps="steps"
         :current="current"
-        :disableNext="false"
+        :disableNext="disableNext"
         @prev="prevHandler"
         @next="nextHandler"
       />
@@ -18,6 +18,7 @@ import { computed, defineComponent, ref, watch } from "vue";
 import AppStepper from "@/components/AppStepper.vue";
 import Question from "@/components/Question.vue";
 import { useQuizStore } from "@/store/quiz.store";
+import { Answer } from "@/models/answer.model";
 export default defineComponent({
   name: "Quiz",
   components: {
@@ -26,18 +27,21 @@ export default defineComponent({
   },
   setup() {
     const current = ref(1);
+    const optionSelected = ref();
     const quizStore = useQuizStore();
     const currentQuestion = computed(
       () => quizStore.questions[current.value - 1]
     );
     const steps = computed(() => quizStore.questions.length);
-
+    const disableNext = computed(() => optionSelected.value === undefined);
     watch(
       currentQuestion,
       (value) => {
-        if (!currentQuestion.value.options) {
+        if (!value) return;
+        if (!value.options) {
           quizStore.getOptionsByQuestionId(value.id);
         }
+        optionSelected.value = value?.answer;
       },
       {
         immediate: true,
@@ -50,12 +54,18 @@ export default defineComponent({
     const nextHandler = () => {
       current.value++;
     };
+    const checkAnswerHandler = (option: Answer) => {
+      optionSelected.value = option;
+      quizStore.setAnswer(currentQuestion.value.id, optionSelected.value);
+    };
     return {
       steps,
       current,
       currentQuestion,
+      disableNext,
       prevHandler,
       nextHandler,
+      checkAnswerHandler,
     };
   },
 });

@@ -7,6 +7,18 @@ const _axios = axios.create({
   baseURL: "https://printful.com",
 });
 
+_axios.interceptors.request.use((config) => {
+  // loader = $loader.show({});
+  return config;
+});
+_axios.interceptors.response.use(
+  (response) => {
+    // loader.hide()
+    return response;
+  },
+  (error) => console.log(error)
+);
+
 export const QuizService = {
   getQuizzes(): Promise<QuizType[]> {
     return _axios.get("test-quiz.php?action=quizzes").then((res: any) => {

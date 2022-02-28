@@ -12,7 +12,6 @@ export default defineComponent({
   setup() {
     const quizStore = useQuizStore();
     const router = useRouter();
-    debugger;
     if (quizStore.isQuizPartial) {
       router.replace({ name: "Home" });
     }

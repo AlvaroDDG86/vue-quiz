@@ -4,10 +4,12 @@
     <div class="question__options">
       <div
         class="question__option"
-        :class="{ 'question__option--selected': idx === selected }"
+        :class="{
+          'question__option--selected': selected && option.id === selected.id,
+        }"
         v-for="(option, idx) in question?.options"
         :key="idx"
-        @click="optionSelectedHandler(option, idx)"
+        @click="optionSelectedHandler(option)"
       >
         {{ option.title }}
       </div>
@@ -35,15 +37,20 @@ export default defineComponent({
   setup(props, { emit }) {
     const selected = ref();
     const { question } = toRefs(props);
-    watch(question, () => {
-      selected.value = undefined;
-    });
-    const optionSelectedHandler = (option: Answer, idx: number) => {
-      selected.value = idx;
-      emit("option-selected", option);
+    watch(
+      question,
+      (value) => {
+        selected.value = value?.answer;
+      },
+      {
+        immediate: true,
+      }
+    );
+    const optionSelectedHandler = (option: Answer) => {
+      selected.value = option;
     };
     const checkAnswerhandler = () => {
-      emit("check-answer");
+      emit("check-answer", selected.value);
     };
     return {
       selected,

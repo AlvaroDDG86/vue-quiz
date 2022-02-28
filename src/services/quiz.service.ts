@@ -1,106 +1,47 @@
+import { Answer } from "@/models/answer.model";
+import { Question } from "@/models/question.model";
+import { QuizType } from "@/models/quiz-type.model";
 import axios from "axios";
+// import { useLoading } from 'vue-loading-overlay'
+const _axios = axios.create({
+  baseURL: "https://printful.com",
+});
 
 export const QuizService = {
-  getQuizzes() {
-    return new Promise((respone) => {
-      respone([
-        {
-          id: 141,
-          title: "Video Games",
-        },
-        {
-          id: 169,
-          title: "Numbers",
-        },
-        {
-          id: 322,
-          title: "Movies",
-        },
-      ]);
+  getQuizzes(): Promise<QuizType[]> {
+    return _axios.get("test-quiz.php?action=quizzes").then((res: any) => {
+      return res.data;
     });
-    // return axios
-    //   .get("https://printful.com/test-quiz.php?action=quizzes")
-    //   .then((res: any) => {
-    //     return res.data;
-    //   });
   },
-  getQuizById(id: number) {
-    return new Promise((respone) => {
-      respone([
-        {
-          id: 29543,
-          title: "What is the highest number used in a Sudoku puzzle?",
-        },
-        {
-          id: 58186,
-          title: "How many dots are used in each letter in the Braille system?",
-        },
-        {
-          id: 86721,
-          title:
-            "How many tenpin bowling skittles need knocking down for a strike?",
-        },
-        {
-          id: 149197,
-          title: "How many sides has an octagon?",
-        },
-        {
-          id: 215738,
-          title: "How many sides has a 20-pence piece?",
-        },
-      ]);
-    });
-    // return axios
-    //   .get(
-    //     `https://printful.com/test-quiz.php?action=questions&quizId=${id.toString()}`
-    //   )
-    //   .then((res: any) => {
-    //     return res.data;
-    //   });
+  getQuizById(id: number): Promise<Question[]> {
+    return _axios
+      .get(`test-quiz.php?action=questions&quizId=${id}`)
+      .then((res: any) => {
+        return res.data;
+      });
   },
-  getQuestionsByQuestionId(id: number) {
-    return new Promise((resolve) => {
-      resolve([
-        {
-          id: 123988,
-          title: "Controller",
-        },
-        {
-          id: 141001,
-          title: "The lights",
-        },
-        {
-          id: 262891,
-          title: "Graphics Card & Heat Sink",
-        },
-        {
-          id: 414029,
-          title: "TV Screen",
-        },
-      ]);
-    });
-    // return axios
-    //   .get(
-    //     "https://printful.com/test-quiz.php?action=answers&quizId=141&questionId=3193"
-    //   )
-    //   .then((res: any) => {
-    //     return res.data;
-    //   });
-  },
-  getAnswerByQuestionId(id: number) {
-    return axios
+  getOptionsByQuestionId(
+    idQuiz: number,
+    idQuestion: number
+  ): Promise<Answer[]> {
+    return _axios
       .get(
-        "https://printful.com/test-quiz.php?action=answers&quizId=141&questionId=3193"
+        `test-quiz.php?action=answers&quizId=${idQuiz}&questionId=${idQuestion}`
       )
       .then((res: any) => {
         return res.data;
       });
   },
+  getAnswerByQuestionId(id: number) {
+    return _axios
+      .get("test-quiz.php?action=answers&quizId=141&questionId=3193")
+      .then((res: any) => {
+        return res.data;
+      });
+  },
   getResume() {
-    return axios
-      .get(
-        "https://printful.com/test-quiz.php?action=answers&quizId=141&questionId=3193"
-      )
+    return _axios
+      .get("test-quiz.php?action=answers&quizId=141&questionId=3193")
       .then((res: any) => {
         return res.data;
       });

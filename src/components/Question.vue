@@ -20,7 +20,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
+import { defineComponent, PropType, ref, toRefs, watch } from "vue";
 import { Question } from "@/models/question.model";
 import { Answer } from "@/models/answer.model";
 
@@ -32,8 +32,12 @@ export default defineComponent({
       require: true,
     },
   },
-  setup(_, { emit }) {
+  setup(props, { emit }) {
     const selected = ref();
+    const { question } = toRefs(props);
+    watch(question, () => {
+      selected.value = undefined;
+    });
     const optionSelectedHandler = (option: Answer, idx: number) => {
       selected.value = idx;
       emit("option-selected", option);

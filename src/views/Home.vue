@@ -56,6 +56,10 @@ export default defineComponent({
       });
     };
     const selectHandler = (optionSelected: SelectItem) => {
+      quizStore.setQuizType({
+        id: optionSelected.id,
+        title: optionSelected.description,
+      });
       quitTypeSelected.value = optionSelected;
       quizStore.getQuizById(optionSelected.id);
     };

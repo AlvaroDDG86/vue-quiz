@@ -35,7 +35,9 @@ export default defineComponent({
     watch(
       currentQuestion,
       (value) => {
-        quizStore.getQuestionsByQuestionId(value.id);
+        if (!currentQuestion.value.options) {
+          quizStore.getOptionsByQuestionId(value.id);
+        }
       },
       {
         immediate: true,

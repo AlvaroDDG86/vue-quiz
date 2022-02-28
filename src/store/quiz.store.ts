@@ -1,4 +1,4 @@
-import { QuizType } from './../models/quiz-type.model';
+import { QuizType } from "./../models/quiz-type.model";
 import { defineStore } from "pinia";
 import { QuizService } from "@/services/quiz.service";
 import { Question } from "@/models/question.model";
@@ -6,6 +6,7 @@ import { Question } from "@/models/question.model";
 export const useQuizStore = defineStore("quiz", {
   state: () => ({
     quizzes: <QuizType[]>[],
+    quizSelected: <QuizType>{},
     questions: <Question[]>[
       {
         id: 29543,
@@ -24,14 +25,19 @@ export const useQuizStore = defineStore("quiz", {
         this.questions = res;
       });
     },
-    getQuestionsByQuestionId(questionId: number) {
-      QuizService.getQuestionsByQuestionId(questionId).then((res: any) => {
-        this.questions.forEach((question) => {
-          if (question.id === questionId) {
-            question.options = [...res];
-          }
-        });
-      });
+    setQuizType(quizType: QuizType) {
+      this.quizSelected = quizType;
+    },
+    getOptionsByQuestionId(questionId: number) {
+      QuizService.getOptionsByQuestionId(this.quizSelected.id, questionId).then(
+        (res: any) => {
+          this.questions.forEach((question) => {
+            if (question.id === questionId) {
+              question.options = [...res];
+            }
+          });
+        }
+      );
     },
   },
   getters: {

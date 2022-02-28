@@ -66,14 +66,18 @@ export default defineComponent({
     const nextHandler = () => {
       current.value++;
     };
-    const checkAnswerHandler = (option: Answer) => {
+    const checkAnswerHandler = async (option: Answer) => {
       optionSelected.value = option;
-      notify({
-        title: `You have selected: ${optionSelected.value.title} 🎉`,
-      });
       quizStore.setAnswer(currentQuestion.value.id, optionSelected.value);
+      const res = await quizStore.getAnswerQuestionByIndex(current.value - 1);
+      notify({
+        title: `Your answer ${optionSelected.value.title.toUpperCase()} is: ${
+          res ? "correct 🎉🎉🎉" : "wrong 🙈🙉🙊"
+        }`,
+      });
     };
     const showResumeHandler = () => {
+      quizStore.getResume();
       router.push({ name: "Resume" });
     };
     return {

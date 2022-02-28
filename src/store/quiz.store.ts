@@ -1,14 +1,16 @@
-import { Answer } from './../models/answer.model';
+import { Answer } from "./../models/answer.model";
 import { QuizType } from "./../models/quiz-type.model";
 import { defineStore } from "pinia";
 import { QuizService } from "@/services/quiz.service";
 import { Question } from "@/models/question.model";
+import { QuizResume } from "@/models/quiz-resume.model";
 
 export const useQuizStore = defineStore("quiz", {
   state: () => ({
     quizzes: <QuizType[]>[],
     quizSelected: <QuizType>{},
     questions: <Question[]>[],
+    resume: <QuizResume>{},
   }),
   actions: {
     getQuizzes() {
@@ -41,6 +43,22 @@ export const useQuizStore = defineStore("quiz", {
           question.answer = answer;
         }
       });
+    },
+    getAnswerQuestionByIndex(index: number) {
+      return QuizService.getAnswerQuestionByIndex(
+        this.quizSelected.id,
+        index,
+        this.questions
+      ).then((res) => {
+        return res;
+      });
+    },
+    getResume() {
+      return QuizService.getResume(this.quizSelected.id, this.questions).then(
+        (res: any) => {
+          this.resume = res;
+        }
+      );
     },
   },
   getters: {

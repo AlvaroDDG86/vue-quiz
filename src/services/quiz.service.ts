@@ -1,14 +1,16 @@
 import { Answer } from "@/models/answer.model";
 import { Question } from "@/models/question.model";
 import { QuizType } from "@/models/quiz-type.model";
+import { QuizResume } from "@/models/quiz-resume.model";
+import { getQueryString } from "./helpers";
 import axios from "axios";
-import { useLoading } from 'vue-loading-overlay'
+import { ActiveLoader, useLoading } from "vue-loading-overlay";
 const _axios = axios.create({
   baseURL: "https://printful.com",
 });
 
 const $loader = useLoading();
-let loader: any;
+let loader: ActiveLoader;
 _axios.interceptors.request.use((config) => {
   loader = $loader.show({});
   return config;
@@ -49,16 +51,22 @@ export const QuizService = {
         return res.data;
       });
   },
-  getAnswerByQuestionId(id: number) {
+  getAnswerQuestionByIndex(
+    idQuiz: number,
+    index: number,
+    questions: Question[]
+  ): Promise<boolean> {
+    const queryString = getQueryString(questions, index);
     return _axios
-      .get("test-quiz.php?action=answers&quizId=141&questionId=3193")
+      .get(`test-quiz.php?action=submit&quizId=${idQuiz}${queryString}`)
       .then((res: any) => {
-        return res.data;
+        return res.data.correct === 1;
       });
   },
-  getResume() {
+  getResume(quizId: number, questions: Question[]): Promise<QuizResume> {
+    const queryString = getQueryString(questions);
     return _axios
-      .get("test-quiz.php?action=answers&quizId=141&questionId=3193")
+      .get(`test-quiz.php?action=submit&quizId=${quizId}${queryString}`)
       .then((res: any) => {
         return res.data;
       });

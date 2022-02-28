@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import { useQuizStore } from "@/store/quiz.store";
 import { QuizType } from "@/models/quiz-type.model";
 import AppSelect from "@/components/AppSelect.vue";
@@ -37,7 +37,7 @@ export default defineComponent({
     const quizStore = useQuizStore();
     const userStore = useUserStore();
     const router = useRouter();
-    const userName = ref("");
+    const userName = ref(userStore.name);
     const quitTypeSelected = ref({} as SelectItem);
     const quizzes = computed(() =>
       quizStore.quizzes.map((quiz: QuizType) => ({

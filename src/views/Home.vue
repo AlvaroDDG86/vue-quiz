@@ -30,13 +30,15 @@ import AppSelect from "@/components/AppSelect.vue";
 import AppInput from "@/components/AppInput.vue";
 import { SelectItem } from "@/models/select.model";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/store/user.store";
 export default defineComponent({
   name: "Home",
   setup() {
+    const quizStore = useQuizStore();
+    const userStore = useUserStore();
     const router = useRouter();
     const userName = ref("");
     const quitTypeSelected = ref({} as SelectItem);
-    const quizStore = useQuizStore();
     const quizzes = computed(() =>
       quizStore.quizzes.map((quiz: QuizType) => ({
         id: quiz.id,
@@ -48,6 +50,7 @@ export default defineComponent({
     });
     quizStore.getQuizzes();
     const submitHandler = () => {
+      userStore.setUser(userName.value);
       router.push({
         name: "Quiz",
       });

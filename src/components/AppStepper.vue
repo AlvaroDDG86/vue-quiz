@@ -1,12 +1,12 @@
 <template>
   <div class="app-stepper">
     <div class="app-stepper__container">
-      <div class="app-stepper__progress" id="progress"></div>
+      <div class="app-stepper__progress" ref="progress"></div>
       <div
         v-for="step in steps"
         :key="step"
         class="app-stepper__step"
-        :class="{ 'app-stepper__step--active': current === step }"
+        :class="{ 'app-stepper__step--active': current >= step }"
       >
         {{ step }}
       </div>
@@ -24,7 +24,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, toRefs, watch } from "vue";
 import AppButton from "./AppButton.vue";
 export default defineComponent({
   name: "AppStepper",
@@ -50,6 +50,13 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const progress = ref();
+    const { current, steps } = toRefs(props);
+    watch(current, (currentValue) => {
+      progress.value.style.width = `${
+        (100 / (steps.value - 1)) * (currentValue - 1)
+      }%`;
+    });
     const prevHandler = () => {
       emit("prev");
     };
@@ -57,6 +64,7 @@ export default defineComponent({
       emit("next");
     };
     return {
+      progress,
       nextHandler,
       prevHandler,
     };
@@ -68,7 +76,7 @@ export default defineComponent({
   @apply w-full;
 }
 .app-stepper__container {
-  @apply flex justify-between relative mb-8 px-5;
+  @apply flex justify-between relative mb-8;
 }
 
 .app-stepper::before {
@@ -76,16 +84,17 @@ export default defineComponent({
 }
 
 .app-stepper__progress {
-  z-index: -1;
-  @apply bg-yellow-300 absolute top-1/2 left-0 -translate-x-1/2 h-1 w-0;
+  top: calc(50% - 2px);
+  @apply bg-blue-700 absolute left-0 h-1 duration-300;
 }
 
 .app-stepper__step {
-  @apply flex justify-center items-center w-8 h-8 bg-white rounded-xl font-bold text-gray-700 text-sm;
+  @apply flex justify-center items-center w-4 h-4 bg-white font-bold text-gray-700 z-10 border-2 border-blue-700 text-xs;
+  @apply md:w-8 md:h-8 md:text-sm md:rounded-md;
 }
 
 .app-stepper__step--active {
-  @apply bg-blue-700 text-white;
+  @apply bg-blue-700 text-white duration-300;
 }
 
 .app-stepper__actions {

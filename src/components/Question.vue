@@ -54,18 +54,21 @@ export default defineComponent({
   @apply bg-gray-100 rounded-lg shadow-md m-4 py-8 w-full;
 }
 .question__title {
-  @apply font-bold text-xl text-left py-1 px-3 mb-2;
+  @apply font-bold text-sm text-left py-1 px-3 mb-2;
+  @apply md:text-xl;
 }
 .question__options {
   @apply w-full grid grid-cols-1 gap-1 px-3;
   @apply sm:grid-cols-2;
 }
 .question__option {
-  @apply rounded border-2 border-green-500 bg-white text-sm flex justify-center items-center h-12 cursor-pointer;
+  min-height: fit-content;
+  @apply rounded border-2 border-green-500 bg-white text-xs flex justify-center items-center cursor-pointer;
   @apply hover:border-green-700 hover:bg-gray-200;
+  @apply md:text-sm md:h-12;
 }
 .question__option--selected {
-  @apply bg-green-500 text-white;
+  @apply bg-green-500 text-white bottom-0;
   @apply hover:bg-green-500 hover:text-white;
 }
 .question__validate {

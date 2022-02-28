@@ -1,10 +1,11 @@
+import { QuizType } from './../models/quiz-type.model';
 import { defineStore } from "pinia";
 import { QuizService } from "@/services/quiz.service";
 import { Question } from "@/models/question.model";
 
 export const useQuizStore = defineStore("quiz", {
   state: () => ({
-    quizzes: [],
+    quizzes: <QuizType[]>[],
     questions: <Question[]>[
       {
         id: 29543,
@@ -32,5 +33,9 @@ export const useQuizStore = defineStore("quiz", {
         });
       });
     },
+  },
+  getters: {
+    isQuizPartial: (state) =>
+      state.questions.every((question) => question.answer !== null),
   },
 });

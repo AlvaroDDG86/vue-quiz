@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Question Should match snapshot 1`] = `
+<div class="question">
+  <div class="question__title">Question prueba</div>
+  <div class="question__options">
+    <div class="question__option">Option 1</div>
+  </div>
+  <div class="question__validate">
+    <app-button-stub disabled="true"></app-button-stub>
+  </div>
+</div>
+`;

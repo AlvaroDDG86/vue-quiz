@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 import AppSelect from "@/components/AppSelect";
 
-describe("Question", () => {
+describe("AppSelect", () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(AppSelect, {

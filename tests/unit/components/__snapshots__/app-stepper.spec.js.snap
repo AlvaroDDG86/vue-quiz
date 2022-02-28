@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppStepper Should match snapshot 1`] = `
+<div class="app-stepper">
+  <div class="app-stepper__container">
+    <div class="app-stepper__progress"></div>
+    <div class="app-stepper__step app-stepper__step--active"><span class="app-stepper__number">1</span></div>
+    <div class="app-stepper__step"><span class="app-stepper__number">2</span></div>
+    <div class="app-stepper__step"><span class="app-stepper__number">3</span></div>
+    <div class="app-stepper__step"><span class="app-stepper__number">4</span></div>
+  </div>
+  <div class="app-stepper__actions">
+    <app-button-stub disabled="true"></app-button-stub>
+    <app-button-stub disabled="false"></app-button-stub>
+  </div>
+</div>
+`;

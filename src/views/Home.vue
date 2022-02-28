@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <AppContainer>
-      <h1 class="home__title">Vue Quiz</h1>
+      <AppTitle>Vue Quiz</AppTitle>
       <form @submit.prevent="submitHandler" class="home__form">
         <AppInput
           id="username"
@@ -23,20 +23,25 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
+// Stores
 import { useQuizStore } from "@/store/quiz.store";
-import { QuizType } from "@/models/quiz-type.model";
+import { useUserStore } from "@/store/user.store";
+// Components
 import AppSelect from "@/components/AppSelect.vue";
 import AppInput from "@/components/AppInput.vue";
+// Models
+import { QuizType } from "@/models/quiz-type.model";
 import { SelectItem } from "@/models/select.model";
-import { useRouter } from "vue-router";
-import { useUserStore } from "@/store/user.store";
+
 export default defineComponent({
   name: "Home",
   setup() {
     const quizStore = useQuizStore();
     const userStore = useUserStore();
     const router = useRouter();
+    quizStore.getQuizzes();
     const userName = ref(userStore.name);
     const quitTypeSelected = ref({} as SelectItem);
     const quizzes = computed(() =>
@@ -48,7 +53,6 @@ export default defineComponent({
     const disableButton = computed(() => {
       return userName.value === "" || !quitTypeSelected.value.id;
     });
-    quizStore.getQuizzes();
     const submitHandler = () => {
       userStore.setUser(userName.value);
       router.push({
@@ -78,12 +82,6 @@ export default defineComponent({
 .home {
   @apply bg-green-400 w-screen h-screen flex justify-center items-center overflow-hidden;
 }
-
-.home__title {
-  @apply font-extrabold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600;
-  @apply md:text-4xl;
-}
-
 .home__form {
   @apply h-full flex flex-col justify-start items-center;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="quiz">
     <AppContainer class="quiz__container">
-      <h3 class="quiz__title">Quiz: {{ quizName }}</h3>
+      <AppTitle>Quiz: {{ quizName }}</AppTitle>
       <Question :question="currentQuestion" @checkAnswer="checkAnswerHandler" />
       <div v-if="showResumeButton" class="quiz__show-resume">
         <AppButton @click="showResumeHandler"
@@ -21,24 +21,25 @@
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
 import { useRouter } from "vue-router";
+import { notify } from "@kyvg/vue3-notification";
+// Stores
+import { useQuizStore } from "@/store/quiz.store";
+//Components
 import Question from "@/components/Question.vue";
 import AppStepper from "@/components/AppStepper.vue";
-import AppButton from "@/components/AppButton.vue";
-import { useQuizStore } from "@/store/quiz.store";
+// Modles
 import { Answer } from "@/models/answer.model";
-import { notify } from "@kyvg/vue3-notification";
 export default defineComponent({
   name: "Quiz",
   components: {
     AppStepper,
     Question,
-    AppButton,
   },
   setup() {
-    const current = ref(1);
-    const optionSelected = ref();
     const quizStore = useQuizStore();
     const router = useRouter();
+    const current = ref(1);
+    const optionSelected = ref();
     const currentQuestion = computed(
       () => quizStore.questions[current.value - 1]
     );
@@ -59,7 +60,6 @@ export default defineComponent({
         immediate: true,
       }
     );
-
     const prevHandler = () => {
       current.value--;
     };
@@ -98,10 +98,6 @@ export default defineComponent({
 <style lang="postcss">
 .quiz {
   @apply w-screen h-screen bg-green-400 flex justify-center items-center;
-}
-.quiz__title {
-  @apply font-extrabold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600;
-  @apply md:text-4xl;
 }
 .quiz__container {
   @apply flex flex-col justify-around items-center;

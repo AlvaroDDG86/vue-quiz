@@ -1,7 +1,7 @@
 <template>
   <div class="resume">
     <AppContainer>
-      <h3 class="resume__title">Thanks, {{ userName }}!</h3>
+      <AppTitle>Thanks, {{ userName }}!</AppTitle>
       <div class="resume__content">
         {{ quizResume }}
       </div>
@@ -15,9 +15,11 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import { useQuizStore } from "@/store/quiz.store";
 import { useRouter } from "vue-router";
+// Stores
+import { useQuizStore } from "@/store/quiz.store";
 import { useUserStore } from "@/store/user.store";
+// Components
 import AppButton from "@/components/AppButton.vue";
 export default defineComponent({
   name: "Resume",
@@ -48,10 +50,6 @@ export default defineComponent({
 <style lang="postcss">
 .resume {
   @apply w-screen h-screen bg-green-400 flex justify-center items-center;
-}
-.resume__title {
-  @apply font-extrabold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600;
-  @apply md:text-4xl;
 }
 .resume__content {
   @apply py-2 rounded-lg shadow-md bg-gray-100 my-2 w-full;

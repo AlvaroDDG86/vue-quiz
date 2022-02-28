@@ -21,10 +21,9 @@ _axios.interceptors.response.use(
     loader.hide();
     return response;
   },
-  (error) => {
+  () => {
     loader.hide();
     Router.replace({ name: "NetworkError" });
-    console.log(error);
   }
 );
 

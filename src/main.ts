@@ -20,6 +20,7 @@ import AppButton from "./components/AppButton.vue";
 import AppSelect from "./components/AppSelect.vue";
 import AppInput from "./components/AppInput.vue";
 import AppContainer from "./components/AppContainer.vue";
+import AppTitle from "./components/AppTitle.vue";
 
 library.add(fas);
 const app = createApp(App);
@@ -34,4 +35,5 @@ app.component("AppButton", AppButton);
 app.component("AppSelect", AppSelect);
 app.component("AppInput", AppInput);
 app.component("AppContainer", AppContainer);
+app.component("AppTitle", AppTitle);
 app.mount("#app");

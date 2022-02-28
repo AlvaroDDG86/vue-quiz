@@ -1,9 +1,9 @@
 <template>
-  <div class="not-found">
+  <div class="network-error">
     <AppContainer>
       <h1>Oppps!</h1>
       <p>An error occurred in the network</p>
-      <div class="not-found__actions">
+      <div class="network-error__actions">
         <AppButton @click="homeClickHandler"> Go Home </AppButton>
       </div>
     </AppContainer>
@@ -29,10 +29,10 @@ export default defineComponent({
 });
 </script>
 <style lang="postcss">
-.not-found {
+.network-error {
   @apply bg-green-500 h-screen w-screen flex justify-center items-center;
 }
-.not-found__actions {
+.network-error__actions {
   @apply my-4;
 }
 </style>

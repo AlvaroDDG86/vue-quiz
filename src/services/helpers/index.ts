@@ -1,5 +1,6 @@
 import { Question } from "@/models/question.model";
 
+// Get the query string for the api
 export const getQueryString = (
   questions: Question[],
   position?: number

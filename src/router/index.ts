@@ -1,7 +1,6 @@
 import { useUserStore } from "./../store/user.store";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/views/Home.vue";
-import { nextTick } from "vue";
 
 const routes: Array<RouteRecordRaw> = [
   {

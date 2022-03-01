@@ -7,7 +7,7 @@ export const getQueryString = (
 ): string => {
   const queryString = questions.reduce((prev, current, index) => {
     const questionId =
-      !position || position === index ? current?.answer?.id : "";
+      position === undefined || position === index ? current?.answer?.id : "";
     prev = `${prev}&answers[]=${questionId}`;
     return prev;
   }, "");

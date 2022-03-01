@@ -1,6 +1,10 @@
 # Quiz Game
 ## Vue 3, Pinia, Typescript, tailwind, Jest, Cypress
 
+[LIVE APP](https://vue-quiz-tailwind.netlify.app/#/)
+[alvarodedios.me](http://alvarodedios.me/)
+
+
 ## Techs
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png" width="100" height="100" /><img src="https://pinia.vuejs.org/logo.svg" width="100" height="100" /><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png" width="100" height="100" />
 

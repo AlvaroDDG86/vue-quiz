@@ -55,6 +55,7 @@ export default defineComponent({
     });
     const submitHandler = () => {
       userStore.setUser(userName.value);
+      if (userName.value === "" || !quitTypeSelected.value.id) return;
       router.push({
         name: "Quiz",
       });

@@ -31,6 +31,7 @@ export default defineComponent({
 <style lang="postcss">
 .network-error {
   @apply bg-green-500 h-screen w-screen flex justify-center items-center;
+  @apply dark:text-gray-100;
 
   &__actions {
     @apply my-4;

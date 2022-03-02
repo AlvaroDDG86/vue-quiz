@@ -31,8 +31,9 @@ export default defineComponent({
 <style lang="postcss">
 .not-found {
   @apply bg-green-500 h-screen w-screen flex justify-center items-center;
-}
-.not-found__actions {
-  @apply my-4;
+
+  &__actions {
+    @apply my-4;
+  }
 }
 </style>

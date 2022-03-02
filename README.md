@@ -1,8 +1,8 @@
 # Quiz Game
 ## Vue 3, Pinia, Typescript, tailwind, Jest, Cypress
 
-[LIVE APP](https://vue-quiz-tailwind.netlify.app/#/)
-[alvarodedios.me](http://alvarodedios.me/)
+- [LIVE APP](https://vue-quiz-tailwind.netlify.app/#/)
+- [alvarodedios.me](http://alvarodedios.me/)
 
 
 ## Techs

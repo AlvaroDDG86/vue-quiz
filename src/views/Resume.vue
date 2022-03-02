@@ -50,12 +50,15 @@ export default defineComponent({
 <style lang="postcss">
 .resume {
   @apply w-screen h-screen bg-green-400 flex justify-center items-center;
-}
-.resume__content {
-  @apply py-2 rounded-lg shadow-md bg-gray-100 my-2 w-full;
-  @apply md:py-4;
-}
-.resume__actions {
-  @apply py-2;
+  @apply dark:bg-green-800;
+
+  &__content {
+    @apply py-2 rounded-lg shadow-md bg-gray-100 my-2 w-full text-gray-600;
+    @apply md:py-4;
+    @apply dark:bg-gray-600 dark:text-gray-100;
+  }
+  &__actions {
+    @apply py-2;
+  }
 }
 </style>

@@ -42,8 +42,8 @@ export default defineComponent({
     const userStore = useUserStore();
     const router = useRouter();
     quizStore.getQuizzes();
-    const userName = ref(userStore.name);
-    const quitTypeSelected = ref({} as SelectItem);
+    const userName = ref<string>(userStore.name);
+    const quitTypeSelected = ref<SelectItem>({} as SelectItem);
     const quizzes = computed(() =>
       quizStore.quizzes.map((quiz: QuizType) => ({
         id: quiz.id,
@@ -82,11 +82,14 @@ export default defineComponent({
 <style lang="postcss">
 .home {
   @apply bg-green-400 w-screen h-screen flex justify-center items-center overflow-hidden;
-}
-.home__form {
-  @apply h-full flex flex-col justify-start items-center;
-}
-.home__actions {
-  @apply mt-5;
+  @apply dark:bg-green-800;
+
+  &__form {
+    @apply h-full flex flex-col justify-start items-center;
+  }
+
+  &__actions {
+    @apply mt-5;
+  }
 }
 </style>

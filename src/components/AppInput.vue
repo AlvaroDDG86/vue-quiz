@@ -51,11 +51,15 @@ export default defineComponent({
 <style lang="postcss" scoped>
 .base-input {
   @apply w-full flex flex-col items-start py-2 px-4;
-}
-.base-input label {
-  @apply py-2 px-1 font-bold text-gray-600;
-}
-.base-input input {
-  @apply py-2 px-1 rounded-lg w-full outline-none bg-gray-100;
+
+  & label {
+    @apply py-2 px-1 font-bold text-gray-600;
+    @apply dark:text-gray-200;
+  }
+
+  & input {
+    @apply py-2 px-1 rounded-lg w-full outline-none bg-gray-100;
+    @apply dark:bg-gray-600 dark:text-gray-200;
+  }
 }
 </style>

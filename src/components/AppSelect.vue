@@ -42,8 +42,8 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const { options: optionsList } = toRefs(props);
-    const selected = ref({} as SelectItem);
-    const open = ref(false);
+    const selected = ref<SelectItem>({} as SelectItem);
+    const open = ref<boolean>(false);
 
     const blurHandler = () => {
       open.value = false;
@@ -72,22 +72,23 @@ export default defineComponent({
 <style lang="postcss" scoped>
 .app-select {
   @apply relative w-full text-center outline-none py-2 px-4;
-}
+  &__selected {
+    @apply bg-gray-100 text-gray-800 cursor-pointer select-none rounded-lg flex justify-between items-center py-4 px-1 h-10;
+    @apply dark:bg-gray-600 dark:text-gray-100;
+  }
 
-.app-select__selected {
-  @apply bg-gray-100 text-gray-800 cursor-pointer select-none rounded-lg flex justify-between items-center py-4 px-1 h-10;
-}
+  &__items {
+    @apply bg-gray-100 text-gray-800 overflow-hidden absolute left-0 right-0 z-10 shadow-xl mx-4 my-2 rounded-lg;
+    @apply dark:bg-gray-600 dark:text-gray-100;
 
-.app-select__items {
-  @apply bg-gray-100 text-gray-800 overflow-hidden absolute left-0 right-0 z-10 shadow-xl mx-4 my-2 rounded-lg;
-}
+    &--close {
+      @apply hidden;
+    }
+  }
 
-.app-select__items--close {
-  @apply hidden;
-}
-
-.app-select__item {
-  @apply cursor-pointer py-2;
-  @apply hover:bg-gray-400;
+  &__item {
+    @apply cursor-pointer py-2;
+    @apply hover:bg-gray-400;
+  }
 }
 </style>

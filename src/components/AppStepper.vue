@@ -74,35 +74,36 @@ export default defineComponent({
 <style lang="postcss">
 .app-stepper {
   @apply w-full;
-}
-.app-stepper__container {
-  @apply flex justify-between relative mb-8;
-}
 
-.app-stepper::before {
-  @apply bg-blue-700 absolute top-1/2 left-0 -translate-y-1/2 h-1 w-full z-10;
-}
+  &__container {
+    @apply flex justify-between relative mb-8;
+  }
 
-.app-stepper__progress {
-  top: calc(50% - 2px);
-  @apply bg-blue-700 absolute left-0 h-1 duration-300;
-}
+  &::before {
+    @apply bg-blue-700 absolute top-1/2 left-0 -translate-y-1/2 h-1 w-full z-10;
+  }
 
-.app-stepper__step {
-  @apply flex justify-center items-center w-2 h-2 rounded-lg bg-white font-bold text-gray-700 z-10 border-2 border-blue-700 text-xs;
-  @apply md:w-8 md:h-8 md:text-sm md:rounded-md;
-}
+  &__progress {
+    top: calc(50% - 2px);
+    @apply bg-blue-700 absolute left-0 h-1 duration-300;
+  }
 
-.app-stepper__number {
-  @apply hidden;
-  @apply md:inline;
-}
+  &__step {
+    @apply flex justify-center items-center w-2 h-2 rounded-lg bg-white font-bold text-gray-700 z-10 border-2 border-blue-700 text-xs;
+    @apply md:w-8 md:h-8 md:text-sm md:rounded-md;
 
-.app-stepper__step--active {
-  @apply bg-blue-700 text-white duration-300;
-}
+    &--active {
+      @apply bg-blue-700 text-white duration-300;
+    }
+  }
 
-.app-stepper__actions {
-  @apply w-full flex justify-evenly;
+  &__number {
+    @apply hidden;
+    @apply md:inline;
+  }
+
+  &__actions {
+    @apply w-full flex justify-evenly;
+  }
 }
 </style>

@@ -35,7 +35,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const selected = ref();
+    const selected = ref<Answer>();
     const { question } = toRefs(props);
     watch(
       question,
@@ -64,27 +64,33 @@ export default defineComponent({
 .question {
   @apply bg-gray-100 rounded-lg shadow-md m-2 py-8 w-full;
   @apply md:m-4;
-}
-.question__title {
-  @apply font-bold text-sm text-left py-1 px-3 mb-2;
-  @apply md:text-xl;
-}
-.question__options {
-  min-width: 4rem;
-  @apply w-full grid grid-cols-1 gap-1 px-3;
-  @apply sm:grid-cols-2;
-}
-.question__option {
-  min-height: fit-content;
-  @apply rounded border-2 border-green-500 bg-white text-xs flex justify-center items-center cursor-pointer duration-300 shadow-md;
-  @apply hover:border-green-700 hover:bg-gray-200 hover:shadow-none;
-  @apply md:text-sm md:h-12;
-}
-.question__option--selected {
-  @apply bg-green-500 text-white bottom-0;
-  @apply hover:bg-green-500 hover:text-white;
-}
-.question__validate {
-  @apply mt-4;
+  @apply dark:bg-gray-600 text-gray-100;
+
+  &__title {
+    @apply font-bold text-sm text-left py-1 px-3 mb-2 text-gray-800;
+    @apply md:text-xl;
+    @apply dark:text-gray-100;
+  }
+  &__options {
+    min-width: 4rem;
+    @apply w-full grid grid-cols-1 gap-1 px-3;
+    @apply sm:grid-cols-2;
+  }
+  &__option {
+    min-height: fit-content;
+    @apply rounded border-2 border-green-500 bg-white text-gray-700 text-xs flex justify-center items-center cursor-pointer duration-300 shadow-md;
+    @apply hover:border-green-700 hover:bg-gray-200 hover:shadow-none;
+    @apply md:text-sm md:h-12;
+    @apply dark:bg-gray-600 dark:text-gray-100;
+
+    &--selected {
+      @apply bg-green-500 text-white bottom-0;
+      @apply hover:bg-green-500 hover:text-white;
+      @apply dark:bg-green-800;
+    }
+  }
+  &__validate {
+    @apply mt-4;
+  }
 }
 </style>
